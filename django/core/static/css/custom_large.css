@@ -1,0 +1,42 @@
+@media (min-width: 992px) {
+    /* ---------- Navigation ---------- */
+    
+    h1 {
+        font-size: 1em;
+    }
+
+    .navbar-brand {
+        padding-left: 0.3em;
+    }
+
+    .nav-link {
+        margin-left: 0.4em;
+        margin-right: 0.7em;
+        font-size: 1.3em;
+    }
+
+    /* ---------- Main ---------- */
+
+    main {
+        margin-top: 4em;
+        min-height: calc(100vh - 3.671em);
+    }
+
+    /* ---------- Survey ---------- */
+
+    #welcomebanner {
+        padding: 6rem 0;
+    }
+
+    #welcomebanner-title {
+        font-size: 7em;
+    }
+
+    /* ---------- Footer ---------- */
+
+    #footer-content img {
+        height: 4.5em;
+        margin: 0 2em 2em 2em;
+        display: inline-block;
+    }
+}

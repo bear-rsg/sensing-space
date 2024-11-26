@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block main %}
+
+<div id="welcomebanner">
+    <div id="welcomebanner-title">
+        Sensing
+        <br>
+        Space
+    </div>
+</div>
+
+<div class="container survey-container">
+    <h2>Share your experience</h2>
+    <form class="survey-form" enctype="multipart/form-data" name="form" method="POST" action="{% url 'researchdata:survey-create' %}">
+        {% csrf_token %}
+        <input type="hidden" id="id_geolocation_latitude" name="geolocation_latitude">
+        <input type="hidden" id="id_geolocation_longitude" name="geolocation_longitude">
+        <p>
+            <label for="id_where_are_you">Where are you?</label>
+            <select name="where_are_you" id="id_where_are_you" required="required">
+                <option value="" selected="">--- Select location ---</option>
+                <option value="" data-other="true">(Location not listed, specify below)</option>
+                {% for location in locations %}
+                    <option value="{{ location.id }}">{{ location }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label for="id_where_are_you_specific">Where exactly in the above space are you?</label>
+            <input type="text" name="where_are_you_specific" id="id_where_are_you_specific">
+            <span class="helptext">e.g. floor number, room number, etc.</span>
+        </p>
+
+        {% include 'researchdata/snippets/survey-input-boolean.html' with name='have_you_been_in_this_space_before' question='Have you been in this space before?' data_boolean=object.have_you_been_in_this_space_before exclude_emotion=1 include_helptext=1 %}
+
+        {% include 'researchdata/snippets/survey-input-emotion.html' with name='how_is_your_day_going' emotion_question='How is your day going so far?' include_helptext=1 %}
+
+        <button id="survey-create-submit" type="submit">Let's go 🎉</button>
+    </form>
+</div>
+
+{% include 'researchdata/snippets/survey-js.html' %}
+
+{% endblock %}

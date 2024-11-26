@@ -17,9 +17,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    # 3rd party apps
     # Custom apps
     'account',
     'general',
+    'researchdata',
 ]
 
 MIDDLEWARE = [
@@ -161,7 +163,7 @@ LOGGING = {
     'handlers': {
         'stream': {
             'class': 'logging.StreamHandler',
-            'level': 'DEBUG' if DEBUG else 'INFO',  # NOQA
+            'level': 'INFO',
             'formatter': 'verbose',
         },
         'file': {
@@ -181,7 +183,7 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['stream', 'file', 'mail_admins'],
-            'level': 'DEBUG' if DEBUG else 'INFO',  # NOQA
+            'level': 'INFO',
             'propagate': 'True',
         },
     },
