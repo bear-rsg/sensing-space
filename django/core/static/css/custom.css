@@ -1,0 +1,430 @@
+
+/* ---------- General ---------- */
+
+html, body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    font-weight: 300;
+    color: white;
+    background: black;
+
+    /* Variables */
+    --color-primary: #FFCC00;
+    --color-secondary: black;
+}
+
+a {
+    color: #FFF;
+    font-weight: 500;
+}
+
+a:hover {
+    color: #FFF;
+}
+
+h1 {
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+    font-weight: 700;
+    color: white;
+}
+
+h2 {
+    padding-top: 2em;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    font-size: 2em;
+    margin: 1.5em 0 1em 0;
+}
+
+h3 {
+    padding: 2em 0 0.5em 0;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+.iframe-large {
+    display: block;
+    margin: 0 auto;
+    overflow: scroll;
+    width: 100%;
+    height: calc(90vh - 7em);
+    border: none;
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 0;
+    height: 0;
+    margin: 7em auto;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ---------- Forms ---------- */
+
+label {
+    display: inline-block;
+    font-size: 0.95em;
+    font-weight: bold;
+}
+
+label.label-active {
+    color: #FFF;
+}
+
+.helptext,
+.form-submit-notes {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.helptext a,
+.form-submit-notes a {
+    text-decoration: underline;
+}
+
+.errorlist {
+    color: red;
+}
+
+input,
+textarea,
+select,
+button[type='submit'] {
+    width: 100%;
+    display: block;
+    padding: 0.3em;
+    text-align: center;
+}
+
+select {
+    text-align: center;
+}
+
+input[type='checkbox'] {
+    display: inline;
+    width: auto;
+    -ms-transform: scale(2); /* IE */
+    -moz-transform: scale(2); /* FF */
+    -webkit-transform: scale(2); /* Safari and Chrome */
+    -o-transform: scale(2); /* Opera */
+    transform: scale(2);
+    padding: 10px;
+    margin-left: 0.5em;
+    margin-right: 1em;
+}
+
+input[type='file'] {
+    display: block;
+    margin: 0.5em auto;
+    width: fit-content;
+}
+
+form ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+form ul li {
+    display: inline-block;
+}
+
+form ul li label {
+    margin: 0.3em 2em 0 0;
+    cursor: pointer;
+}
+
+form ul li label:hover {
+    color: #FFF;
+}
+
+button[type='submit'],
+button[type='submit']:visited {
+    background: var(--color-primary);
+    color: black;
+    border: none;
+    font-weight: bold;
+    padding: 0.7em;
+    border-radius: 0.5em;
+    margin: 4em auto 2em auto;
+    font-size: 1.5em;
+    width: 70%
+}
+
+button[type='submit']:hover {
+    opacity: 0.9;
+}
+
+/* Accordion */
+
+.accordion {
+    margin: 3em auto;
+}
+
+.accordion-item {
+    margin: 3em auto;
+}
+
+.accordion-item-header {
+    background-color: var(--color-primary);
+    color: black;
+    padding: 0.3em 1.2em;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.accordion-item-header:hover {
+    opacity: 0.9;
+}
+
+.accordion-item-header span {
+    display: inline-block;
+}
+
+.accordion-item-header-emoji {
+    font-size: 1.8em;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border-radius: 100%;
+    background: black;
+    margin-right: 0.5em;
+}
+
+.accordion-item-header-text {
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+.accordion-item-header-symbol {
+    float: right;
+    font-size: 2.5em;
+    margin-top: -0.2em;
+}
+
+.accordion-item-body {
+    background: rgba(255, 255, 255, 0.13);
+    padding: 1.5em;
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+
+/* ---------- Navigation ---------- */
+
+nav {
+    background: black;
+    vertical-align: middle;
+}
+
+.navbar-brand {
+    display: inline-block;
+    text-transform: capitalize;
+    font-size: 1.6em;
+    color: white;
+}
+
+.nav-link {
+    font-weight: 600;
+    font-size: 1.3em;
+    color: white;
+}
+
+.nav-link.active {
+    border-bottom: 0.3em solid var(--color-primary);
+}
+
+nav a:hover,
+.dropdown-item:hover {
+    color: #FFF;
+}
+
+/* ---------- Main ---------- */
+
+main {
+    padding-bottom: 4em;
+}
+
+main p,
+main ul,
+main ol {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+}
+
+main a {
+    text-decoration: none;
+}
+
+/* ---------- Survey ---------- */
+
+.survey-container {
+    text-align: center;
+}
+
+#welcomebanner-title {
+    text-align: center;
+    font-weight: 700;
+}
+
+.survey-form {
+    text-align: center;
+}
+
+.survey-form p {
+    display: block;
+    margin: 4em 0;
+}
+
+.survey-form p.linked {
+    margin-top: -2.7em;
+}
+
+.survey-boolean-inputs,
+.survey-emotion-inputs {
+    display: block;
+    background: rgba(255, 255, 255, 0.13);
+    width: fit-content;
+    font-size: 2.3em;
+    padding: 0.2em;
+    border-radius: 3em;
+    margin: 0 auto 0.7em auto;
+    user-select: none;
+}
+
+.survey-boolean-inputs span,
+.survey-emotion-inputs span {
+    display: inline-block;
+    padding-top: 0.2em;
+    height: 60px;
+    width: 60px;
+    text-align: center;
+    margin: 0 0.1em;
+    border-radius: 100%;
+    cursor: pointer;
+    border: 0.1em solid transparent;
+}
+
+.survey-boolean-inputs span:hover,
+.survey-emotion-inputs span:hover {
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.survey-boolean-inputs span.active,
+.survey-emotion-inputs span.active {
+    background: black;
+}
+
+.survey-boolean-inputs span[value="False"].active {
+    border: 0.1em solid #eb2f06;
+}
+
+.survey-boolean-inputs span[value="True"].active {
+    border: 0.1em solid #2ecc71;
+}
+
+.survey-emotion-inputs span[value="1"].active {
+    border: 0.1em solid #2ecc71;
+}
+
+.survey-emotion-inputs span[value="2"].active {
+    border: 0.1em solid white;
+}
+
+.survey-emotion-inputs span[value="3"].active {
+    border: 0.1em solid #eb2f06;
+}
+
+.survey-colourpicker {
+    display: block;
+}
+
+.survey-colourpicker-colour {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+.survey-colourpicker-colour:hover {
+    opacity: 0.9;
+}
+
+.survey-colourpicker-colour.active {
+    outline: 0.2em solid white;
+}
+
+.survey-uploaded-image,
+.survey-uploaded-audio {
+    display: block;
+    margin: 1em auto;
+    max-width: 70%;
+}
+
+.survey-form-submit-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: black;
+    height: fit-content;
+    border-top: 3px solid #404040;
+}
+
+.survey-form-submit-container button {
+    margin: 1em auto;
+    padding: 0.3em;
+    font-size: 1.3em;
+}
+
+/* ---------- Campus ---------- */
+
+#campus-iframe {
+    width: 100%;
+    height: calc(100vh - 5em);
+    margin-top: 4em;
+    display: block;
+    border: none;
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+    padding: 5em 0;
+    text-align: center;
+}
+
+#footer-content-text {
+    margin-top: 2em;
+}
+
+footer a:hover {
+    color: #FFF;
+}
+
+/* ---------- Error Pages ---------- */
+
+.errorpage-path {
+    font-weight: bold;
+}
+
+.errorpage-code {
+    margin-top: 3em;
+    font-size: 0.8em;
+}

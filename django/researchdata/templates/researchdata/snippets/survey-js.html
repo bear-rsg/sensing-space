@@ -1,0 +1,124 @@
+<script>
+$(document).ready(function(){
+
+    // Shuffle order of array of DOM elements
+    function shuffle(array){
+        var currentIndex = array.length,
+            temporaryValue, randomIndex;
+        // While there remain elements to shuffle
+        while (0 !== currentIndex){
+            // Pick a remaining element
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            // And swap it with the current element
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+        return array;
+    }
+
+    // Set the random changing title
+    title_original_1 = 'Sensing';
+    title_original_2 = 'Space';
+    // Default title
+    $('#welcomebanner-title').html(`${title_original_1}<br>${title_original_2}`);
+    // Function to replace chars in a string with random emojis
+    function setRandomEmojiInString(str){
+        let emojis = [
+            '😍', '😄', '😂', '🥳', '😖', '😜', '🥶', '🤮', '😇', '😳', '😎', '👍',
+            '🥵', '🙂', '👌', '🤓', '😡', '🫠', '🤫', '🫶', '🔥', '🥹', '😕', '🤯',
+        ]
+        randomStrIndex = Math.floor(Math.random() * (str.length - 1));
+        randomEmojiIndex = Math.floor(Math.random() * (emojis.length - 1));
+        return str.substring(0, randomStrIndex) + emojis[randomEmojiIndex] + str.substring(randomStrIndex + 1); 
+    }
+    // Applies the above setRandomEmojiInString to the title
+    function setRandomEmojiInTitle(){
+        title_new_1 = setRandomEmojiInString(title_original_1);
+        title_new_2 = setRandomEmojiInString(title_original_2);
+        $('#welcomebanner-title').html(`${title_new_1}<br>${title_new_2}`);
+    }
+    // Call above function on page load and then again every 1.3 seconds
+    setRandomEmojiInTitle();
+    setInterval(setRandomEmojiInTitle, 1300);
+
+    // Accordion
+    // Toggle
+    $('.accordion').on('click', '.accordion-item-header', function() {
+        // Toggle visibility of the body, which comes next after the header
+        $(this).next().slideToggle("fast", "swing", function(){
+            $("html, body").animate({ scrollTop: $(this).offset().top - 150 });
+        });
+        // Toggle icon
+        var headerSymbol = $(this).find('.accordion-item-header-symbol').first();
+        if (headerSymbol.text() == '+') headerSymbol.text('-');
+        else headerSymbol.text('+');
+    });
+    // Shuffle
+    $(".accordion").html(shuffle($(".accordion-item").get()));
+
+    // Set/remove boolean and emotion input values
+    $('body').on('click', '.survey-boolean-inputs span, .survey-emotion-inputs span', function(){
+        let inputValue = $(this).attr('value');
+        let input = $(this).parent().parent().find('input');
+        // Remove all existing input values
+        $(this).parent().find('span').removeClass('active');
+        // Remove input value, if set
+        if (input.val() == inputValue) input.removeAttr('value').trigger('change');
+        // Add input value, if not yet set
+        else {
+            $(this).addClass('active');
+            input.val(inputValue).trigger('change');
+        }
+    });
+
+    // Colour picker
+    // Toggle
+    $('body').on('click', '.survey-colourpicker-colour', function(){
+        let input = $(this).parent().parent().find('input');
+        // Remove value
+        if ($(this).hasClass('active')){
+            $(this).removeClass('active');
+            input.val('');
+        }
+        // Set value
+        else {
+            $('.survey-colourpicker-colour.active').removeClass('active');
+            $(this).addClass('active');
+            input.val($(this).attr('data-value'));
+        }
+    });
+    // Shuffle
+    $(".survey-colourpicker").html(shuffle($(".survey-colourpicker-colour").get()));
+
+    // Set the geolocation hidden field values
+    let geoInputLat = $('#id_geolocation_latitude');
+    let geoInputLong = $('#id_geolocation_longitude');
+    if (navigator.geolocation && geoInputLat && geoInputLong){
+        navigator.geolocation.getCurrentPosition(function(location){
+            geoInputLat.val(location.coords.latitude);
+            geoInputLong.val(location.coords.longitude);
+        });
+    }
+
+    // Hide inputs with triggers by default
+    $('p[data-trigger-true]').hide();
+    $('p[data-trigger-other]').hide();
+    // If an input is a trigger, show/hide its receivers based on its value
+    $('input').on('change', function(){
+        // Get all p tags in form that are triggered by this input
+        let receiversTrue = $(`p[data-trigger-true=${$(this).attr('id')}]`);
+        // If there are receivers for this input
+        if ($(receiversTrue).length){
+            if (['True', 'False'].includes($(this).val())) receiversTrue.show();
+            else receiversTrue.hide();
+            // Recursively call function in receivers
+            receiversTrue.each(function(){
+                $(this).find('input').trigger('change');
+            });
+        }
+    }).trigger('change');  // Trigger on page load, so existing values will be included
+
+});
+</script>

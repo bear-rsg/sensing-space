@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block main %}
+
+<div class="container survey-container">
+    <h2>{{ object.location }}</h2>
+    <p>
+        All questions are optional and your answers are anonymous. Answer as many questions as you'd like and tap the Finish button to save.
+    </p>
+    <p>
+        ⭐️ Bookmark this page so you can access it in the future, in case you want to view your answers or make any changes.
+    </p>
+    <form class="survey-form" enctype="multipart/form-data" method="POST" action="">
+        {% csrf_token %}
+
+        <div class="accordion">
+            <!-- Visual -->
+            <div class="accordion-item">
+                <div class="accordion-item-header">
+                    <span class="accordion-item-header-emoji">👀</span>
+                    <span class="accordion-item-header-text">Visual</span>
+                    <span class="accordion-item-header-symbol">+</span>
+                </div>
+                <div class="accordion-item-body">
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_trigger' question='Is something you can see affecting how you feel?' data_boolean=object.visual_trigger exclude_emotion=1 %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_things_i_see_moving' question='Things I can see around me are moving' data_boolean=object.visual_things_i_see_moving data_emotion=object.visual_things_i_see_moving_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_things_i_see_predictable' question='Things I can see around me are predictable' data_boolean=object.visual_things_i_see_predictable data_emotion=object.visual_things_i_see_predictable_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_this_space_looks_dark' question='This space looks dark' data_boolean=object.visual_this_space_looks_dark data_emotion=object.visual_this_space_looks_dark_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_this_space_looks_bright' question='This space looks bright' data_boolean=object.visual_this_space_looks_bright data_emotion=object.visual_this_space_looks_bright_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_this_space_looks_colourful' question='This space looks colourful' data_boolean=object.visual_this_space_looks_colourful data_emotion=object.visual_this_space_looks_colourful_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_this_space_looks_highcontrast' question='This space looks high contrast' data_boolean=object.visual_this_space_looks_highcontrast data_emotion=object.visual_this_space_looks_highcontrast_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_this_space_looks_cluttered' question='This space looks cluttered' data_boolean=object.visual_this_space_looks_cluttered data_emotion=object.visual_this_space_looks_cluttered_emotion.id trigger='visual_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='visual_this_space_looks_empty' question='This space looks empty' data_boolean=object.visual_this_space_looks_empty data_emotion=object.visual_this_space_looks_empty_emotion.id trigger='visual_trigger' %}
+
+                    <p>
+                        <label for="id_visual_tell_us_more">Tell us more about how what you see affects your experience</label>
+                        <textarea name="visual_tell_us_more" id="id_visual_tell_us_more">{% if object.visual_tell_us_more %}{{ object.visual_tell_us_more }}{% endif %}</textarea>
+                    </p>
+                    <p>
+                        {% if object.visual_image %}
+                            <img class="survey-uploaded-image" src="{{ object.visual_image.url }}">
+                            <label for="id_visual_image">View/replace the image of your space</label>
+                        {% else %}
+                            <label for="id_visual_image">Upload an image of your space</label>
+                        {% endif %}
+                        <input type="file" name="visual_image" accept="image/*" id="id_visual_image" capture="camera">
+                    </p>
+                </div>
+            </div>
+            <!-- Audio -->
+            <div class="accordion-item">
+                <div class="accordion-item-header">
+                    <span class="accordion-item-header-emoji">🎧</span>
+                    <span class="accordion-item-header-text">Audio</span>
+                    <span class="accordion-item-header-symbol">+</span>
+                </div>
+                <div class="accordion-item-body">
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='audio_trigger' question='Is something you can hear affecting how you feel?' data_boolean=object.audio_trigger exclude_emotion=1 %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='audio_i_can_hear_general_background_noise' question='I can hear general background noise' data_boolean=object.audio_i_can_hear_general_background_noise data_emotion=object.audio_i_can_hear_general_background_noise_emotion.id trigger='audio_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='audio_i_can_hear_specific_noise' question='I can hear specific noises' data_boolean=object.audio_i_can_hear_specific_noise data_emotion=object.audio_i_can_hear_specific_noise_emotion.id trigger='audio_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='audio_i_can_hear_intermittent_noise' question='I can hear intermittent noise' data_boolean=object.audio_i_can_hear_intermittent_noise data_emotion=object.audio_i_can_hear_intermittent_noise_emotion.id trigger='audio_trigger' %}
+
+                    <p>
+                        <label for="id_audio_tell_us_more">Tell us more about how what you hear affects your experience</label>
+                        <textarea name="audio_tell_us_more" id="id_audio_tell_us_more">{% if object.audio_tell_us_more %}{{ object.audio_tell_us_more }}{% endif %}</textarea>
+                    </p>
+                    <p> 
+                        {% if object.audio_file %}
+                            <audio class="survey-uploaded-audio" controls>
+                                <source src="{{ object.audio_file.url }}">
+                                Your browser does not support the audio element.
+                            </audio> 
+                            <label for="id_audio_file">View/replace the audio recording of your space</label>
+                        {% else %}
+                            <label for="id_audio_file">Upload an audio recording of your space</label>
+                        {% endif %}
+                        <input type="file" name="audio_file" id="id_audio_file">
+                    </p>
+                </div>
+            </div>
+            <!-- Body -->
+            <div class="accordion-item">
+                <div class="accordion-item-header">
+                    <span class="accordion-item-header-emoji">🧍</span>
+                    <span class="accordion-item-header-text">Body</span>
+                    <span class="accordion-item-header-symbol">+</span>
+                </div>
+                <div class="accordion-item-body">
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='body_trigger' question='Is the environment around you affecting how you feel?' data_boolean=object.body_trigger exclude_emotion=1 %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='body_can_you_move_comfortably' question='Can you move through the space comfortably?' data_boolean=object.body_can_you_move_comfortably data_emotion=object.body_can_you_move_comfortably_emotion.id trigger='body_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='body_do_you_have_enough_space' question='Do you have enough space around you?' data_boolean=object.body_do_you_have_enough_space data_emotion=object.body_do_you_have_enough_space_emotion.id trigger='body_trigger' %}
+
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='body_is_there_air_moving' question='Is there a breeze or air moving?' data_boolean=object.body_is_there_air_moving data_emotion=object.body_is_there_air_moving_emotion.id trigger='body_trigger' %}
+
+                    <p>
+                        <label for="id_body_tell_us_more">Tell us more about how your physical environment affects your experience</label>
+                        <textarea name="body_tell_us_more" id="id_body_tell_us_more">{% if object.body_tell_us_more %}{{ object.body_tell_us_more }}{% endif %}</textarea>
+                    </p>
+                </div>
+            </div>
+            <!-- Smell -->
+            <div class="accordion-item">
+                <div class="accordion-item-header">
+                    <span class="accordion-item-header-emoji">🐽</span>
+                    <span class="accordion-item-header-text">Smell</span>
+                    <span class="accordion-item-header-symbol">+</span>
+                </div>
+                <div class="accordion-item-body">
+                    {% include 'researchdata/snippets/survey-input-boolean.html' with name='smell' question='Is there a noticeable smell in this space?' data_boolean=object.smell data_emotion=object.smell_emotion.id %}
+
+                    <p>
+                        <label for="id_smell_tell_us_more">Tell us more about how what you smell affects your experience</label>
+                        <textarea name="smell_tell_us_more" id="id_smell_tell_us_more">{% if object.smell_tell_us_more %}{{ object.smell_tell_us_more }}{% endif %}</textarea>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- Submit -->
+        <div class="survey-form-submit-container">
+            <button type="submit">Finished 🔥</button>
+        </div>
+    </form>
+</div>
+
+{% include 'researchdata/snippets/survey-js.html' %}
+
+{% endblock %}

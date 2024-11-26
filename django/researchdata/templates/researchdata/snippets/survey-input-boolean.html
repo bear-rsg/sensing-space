@@ -1,0 +1,16 @@
+<p{% if trigger %} data-trigger-true="id_{{ trigger }}"{% endif %}>
+    <label for="id_{{ name }}">{{ question }}</label>
+    <input type="hidden" name="{{ name }}" id="id_{{ name }}" {% if data_boolean is not None %}value="{{ data_boolean }}"{% endif %}>
+    <span class="survey-boolean-inputs">
+        <!-- Yes/True/Thumb-up -->
+        <span value="True" {% if data_boolean == True %} class="active"{% endif %}>👍</span>
+        <!-- No/False/Thumb-down -->
+        <span value="False" {% if data_boolean == False %} class="active"{% endif %}>👎</span>
+    </span>
+    {% if include_helptext %}
+        <span class="helptext">👍 = Yes<br>👎 = No</span>
+    {% endif %}
+</p>
+{% if not exclude_emotion %}
+    {% include 'researchdata/snippets/survey-input-emotion.html' with name=name data_emotion=data_emotion datatriggertrue=True linked=True %}
+{% endif %}

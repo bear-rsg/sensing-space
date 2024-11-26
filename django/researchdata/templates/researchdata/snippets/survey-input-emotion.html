@@ -1,0 +1,17 @@
+<p{% if datatriggertrue %} data-trigger-true="id_{{ name }}"{% endif %}{% if linked %} class="linked"{% endif %}>
+    <label for="id_{{ name }}_emotion">{% if emotion_question %}{{ emotion_question }}{% else %}How does this affect you?{% endif %}</label>
+    <input type="hidden" name="{{ name }}_emotion" id="id_{{ name }}_emotion"{% if data_emotion is not None %}value="{{ data_emotion }}"{% endif %}>
+    <span class="survey-emotion-inputs">
+        {% for emotion in emotions %}
+            <span value="{{ emotion.id }}" {% if data_emotion == emotion.id %} class="active"{% endif %}>{{ emotion.emoji }}</span>
+        {% endfor %}
+    </span>
+    {% if include_helptext %}
+        <span class="helptext">
+            {% for emotion in emotions %}
+                {{ emotion.emoji }} = {{ emotion.name }}
+                {% if not forloop.last %}<br>{% endif %}
+            {% endfor %}
+        </span>
+    {% endif %}
+</p>

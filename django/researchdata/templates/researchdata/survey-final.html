@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block main %}
+
+<div class="container survey-container">
+
+    <h2>🥳 Thanks!</h2>
+    <p>
+        Your answers have been sent to us successfully.
+    </p>
+    <p>
+        Please feel free to answer these final few questions.
+    </p>
+
+    <form class="survey-form" enctype="multipart/form-data" method="POST" action="">
+        {% csrf_token %}
+
+        <p>
+            <label for="id_final_times_experienced_effects">How many times have you experienced these effects before in this space?</label>
+            <select name="final_times_experienced_effects" id="id_final_times_experienced_effects">
+                <option value="">--- Select an option ---</option>
+                {% for t in times_experienced_effects %}
+                    <option value="{{ t.id }}" {% if t == object.final_times_experienced_effects %} selected="selected"{% endif %}>{{ t }}</option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p>
+            <label for="id_final_colour_represent_mood">Pick a colour that represents your mood</label>
+            <input type="hidden" name="final_colour_represent_mood" id="id_final_colour_represent_mood"{% if object.final_colour_represent_mood %} value="{{ object.final_colour_represent_mood }}"{% endif %}>
+            <span class="survey-colourpicker">
+                {% for colour in colours %}
+                    <span class="survey-colourpicker-colour{% if colour == object.final_colour_represent_mood %} active{% endif %}" data-value="{{ colour.id }}" style="background: #{{ colour.code }}"></span>
+                {% endfor %}
+            </span>
+        </p>
+
+        <button type="submit">Send 😍</button>
+    </form>
+</div>
+
+{% include 'researchdata/snippets/survey-js.html' %}
+
+{% endblock %}
