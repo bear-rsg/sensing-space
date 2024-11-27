@@ -7,10 +7,10 @@
 <div class="container survey-container">
     <h2>{{ object.location }}</h2>
     <p>
-        All questions are optional and your answers are anonymous. Answer as many questions as you'd like and tap the Finish button to save.
+        All questions are optional and your answers are anonymous. Answer as many questions as you'd like and tap the Finished button to save.
     </p>
     <p>
-        ⭐️ Bookmark this page so you can access it in the future, in case you want to view your answers or make any changes.
+        ⭐️ Bookmark this page so you can access it again in the future to view your answers or make any changes.
     </p>
     <form class="survey-form" enctype="multipart/form-data" method="POST" action="">
         {% csrf_token %}
@@ -87,7 +87,7 @@
                         {% else %}
                             <label for="id_audio_file">Upload an audio recording of your space</label>
                         {% endif %}
-                        <input type="file" name="audio_file" id="id_audio_file">
+                        <input type="file" name="audio_file" accept="audio/*" id="id_audio_file">
                     </p>
                 </div>
             </div>
