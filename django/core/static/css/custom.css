@@ -222,6 +222,7 @@ button[type='submit']:hover {
     display: none;
     width: 100%;
     text-align: center;
+    overflow: hidden;
 }
 
 /* ---------- Navigation ---------- */
@@ -389,8 +390,9 @@ main a {
 
 .survey-form-submit-container button {
     margin: 1em auto;
-    padding: 0.3em;
+    padding: 0.4em 2em;
     font-size: 1.3em;
+    width: fit-content;
 }
 
 /* ---------- Campus ---------- */
