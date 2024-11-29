@@ -50,6 +50,8 @@ class Location(models.Model):
     related_name = 'location'
 
     name = models.CharField(max_length=255, unique=True)
+    latitude = models.CharField(max_length=100, blank=True, null=True)
+    longitude = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -87,6 +89,7 @@ class Survey(models.Model):
 
     geolocation_latitude = models.CharField(max_length=100, blank=True, null=True)
     geolocation_longitude = models.CharField(max_length=100, blank=True, null=True)
+    geolocation_accuracy = models.CharField(max_length=100, blank=True, null=True)
     where_are_you = models.ForeignKey(
         Location, blank=True, null=True,
         on_delete=models.RESTRICT, related_name=related_name,

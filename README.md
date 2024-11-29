@@ -1,6 +1,6 @@
 # Sensing Space
 
-This project is a Django-based website created by the Research Software Group for the 'Sensing Space' research project led by Jeremy Kidwell at the University of Birmingham.
+This project is a Django-based website created by the Research Software Group for the 'Sensing Space' research project led by Dorothy Butchard and Jeremy Kidwell at the University of Birmingham.
 
 ## Getting Started
 

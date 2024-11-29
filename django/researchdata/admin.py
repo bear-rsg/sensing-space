@@ -28,7 +28,10 @@ class TimesExperiencedEffectsAdminView(admin.ModelAdmin):
 
 @admin.register(models.Survey)
 class SurveyAdminView(admin.ModelAdmin):
-    list_display = ('id', 'slug', 'location', 'geolocation_latitude', 'geolocation_longitude', 'created')
+    list_display = (
+        'id', 'slug', 'location', 'geolocation_latitude',
+        'geolocation_longitude', 'geolocation_accuracy', 'created'
+    )
     search_fields = ('id', 'slug', 'admin_notes', 'created')
     ordering = ('-created',)
     readonly_fields = ('created', 'slug')
@@ -37,6 +40,7 @@ class SurveyAdminView(admin.ModelAdmin):
             'fields': (
                 'geolocation_latitude',
                 'geolocation_longitude',
+                'geolocation_accuracy',
                 'where_are_you',
                 'where_are_you_specific',
                 'have_you_been_in_this_space_before',

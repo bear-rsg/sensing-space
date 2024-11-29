@@ -95,10 +95,12 @@ $(document).ready(function(){
     // Set the geolocation hidden field values
     let geoInputLat = $('#id_geolocation_latitude');
     let geoInputLong = $('#id_geolocation_longitude');
-    if (navigator.geolocation && geoInputLat && geoInputLong){
+    let geoInputAcc = $('#id_geolocation_accuracy');
+    if (navigator.geolocation && geoInputLat && geoInputLong && geoInputAcc){
         navigator.geolocation.getCurrentPosition(function(location){
             geoInputLat.val(location.coords.latitude);
             geoInputLong.val(location.coords.longitude);
+            geoInputAcc.val(location.coords.accuracy);
         });
     }
 

@@ -19,6 +19,7 @@ class SurveyCreateView(CreateView):
         """
         form.instance.geolocation_latitude = form.data['geolocation_latitude']
         form.instance.geolocation_longitude = form.data['geolocation_longitude']
+        form.instance.geolocation_accuracy = form.data['geolocation_accuracy']
         return super().form_valid(form)
 
     def get_success_url(self):
