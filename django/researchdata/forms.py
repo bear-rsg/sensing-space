@@ -27,6 +27,7 @@ class SurveyUpdateForm(forms.ModelForm):
         exclude = [
             'geolocation_latitude',
             'geolocation_longitude',
+            'geolocation_accuracy',
             'where_are_you',
             'where_are_you_specific',
             'have_you_been_in_this_space_before',

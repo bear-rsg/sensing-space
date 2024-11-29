@@ -34,16 +34,6 @@ def insert_data(apps, schema_editor):
         with transaction.atomic():
             models.Emotion.objects.create(**emotion)
 
-    # Locations
-    locations = [
-        'Example location 1',
-        'Example location 2',
-        'Example location 3',
-    ]
-    for location in locations:
-        with transaction.atomic():
-            models.Location.objects.create(name=location)
-
     # TimesExperiencedEffects
     times = [
         {'name': 'Never', 'order': 1},
