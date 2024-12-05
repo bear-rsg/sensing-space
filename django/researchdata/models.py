@@ -50,6 +50,11 @@ class Location(models.Model):
     related_name = 'location'
 
     name = models.CharField(max_length=255, unique=True)
+    geo_bounding_box = models.TextField(
+        blank=True,
+        null=True,
+        help_text="If available, provide bounding box data for this location. Otherwise specify lat/long below."
+    )
     latitude = models.CharField(max_length=100, blank=True, null=True)
     longitude = models.CharField(max_length=100, blank=True, null=True)
 
